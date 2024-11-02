@@ -1751,13 +1751,15 @@ void yyfree (void * ptr )
 int yywrap(void) { return 1; }
 
 void main() {
-    char input[100];
-    printf("\nEnter the String: ");
-    fgets(input, 100, stdin);
+    // char input[100];
+    // printf("\nEnter the String: ");
+    // fgets(input, 100, stdin);
 
-    yy_scan_string(input);
+    // Set yyin to read from the input string
+    // yy_scan_string(input);
 
-    yylex();  
+    yyin=fopen("vowel.txt","r");
+    yylex();  // Process the input
     
     printf("\nVowel count: %d", v);
     printf("\nConsonant count: %d", c);

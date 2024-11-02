@@ -18,13 +18,14 @@ consonant [B-DF-HJ-NP-TV-Zb-df-hj-np-tv-z]
 int yywrap(void) { return 1; }
 
 void main() {
-    char input[100];
-    printf("\nEnter the String: ");
-    fgets(input, 100, stdin);
+    // char input[100];
+    // printf("\nEnter the String: ");
+    // fgets(input, 100, stdin);
 
     // Set yyin to read from the input string
-    yy_scan_string(input);
+    // yy_scan_string(input);
 
+    yyin=fopen("vowel.txt","r");
     yylex();  // Process the input
     
     printf("\nVowel count: %d", v);
