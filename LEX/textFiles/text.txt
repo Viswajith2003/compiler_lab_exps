@@ -1,0 +1,2 @@
+Lex: A tool that generates a lexical analyzer (scanner) to break input text into tokens based on specified patterns, typically used for parsing languages or data formats.
+Yacc: A tool that generates a parser based on a specified grammar, used to analyze and structure tokens from Lex according to language syntax rules, often in compiler construction.
