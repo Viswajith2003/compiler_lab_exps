@@ -1760,13 +1760,8 @@ int yywrap(void) { return 1; }
 
 void main() {
     yyin = fopen("./textFiles/text.txt", "r");
-    if (!yyin) {
-        perror("Error opening file");
-        exit(1);
-    }
 
     yylex();
-    fclose(yyin);
 
     printf("\nWord count: %d\nLine count: %d\nCharacter count: %d\n", wc, lc, cc);
 }
