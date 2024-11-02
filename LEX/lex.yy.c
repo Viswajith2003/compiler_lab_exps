@@ -1758,7 +1758,7 @@ void main() {
     // Set yyin to read from the input string
     // yy_scan_string(input);
 
-    yyin=fopen("vowel.txt","r");
+    yyin=fopen("./textFiles/vowel.txt","r");
     yylex();  // Process the input
     
     printf("\nVowel count: %d", v);
