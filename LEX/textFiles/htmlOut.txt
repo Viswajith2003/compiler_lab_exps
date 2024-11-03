@@ -1,0 +1,19 @@
+
+
+  
+    Sample HTML Page
+    
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+    
+  
+  
+    Hello, HTML!
+    This is a simple HTML example.
+  
+
