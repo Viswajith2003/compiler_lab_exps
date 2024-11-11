@@ -15,6 +15,6 @@ if                           { return IF; }
 \"                           { return STR; }
 ";"                          { return SEMI; }
 \n                           { return NL; }  
-(" ")                        { }
+(" ")                        { return SPACE; }
 %%
 int yywrap(){return 1;}

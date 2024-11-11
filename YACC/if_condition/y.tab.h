@@ -64,7 +64,8 @@ extern int yydebug;
     NL = 265,                      /* NL  */
     STR = 266,                     /* STR  */
     PRINTF = 267,                  /* PRINTF  */
-    SEMI = 268                     /* SEMI  */
+    SEMI = 268,                    /* SEMI  */
+    SPACE = 269                    /* SPACE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -84,6 +85,7 @@ extern int yydebug;
 #define STR 266
 #define PRINTF 267
 #define SEMI 268
+#define SPACE 269
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

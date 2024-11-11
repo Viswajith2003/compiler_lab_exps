@@ -794,7 +794,7 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 18 "if.l"
-{ }
+{ return SPACE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
