@@ -4,15 +4,16 @@
 #include <stdlib.h>
 %}
 %%
-"struct"                        { return STRUCT; }
-[A-Za-z_][A-Za-z0-9_]*          { return ID; }
-"int"|"float"|"char"|"double"   { return TYPE; }
-"{"                             { return BROPEN; }
-"}"                             { return BRCLOSE; }
-";"                             { return SEMI; }
-"\\[[0-9]*\\]"                  { return ARR; }   // Corrected array pattern
-"\n"                            { return NL; }
+struct                            { return STRUCT; }
+([A-Za-z]([A-Za-z]|[0-9])*)             { return ID; }
+("int "|"float "|"char "|"double ")     { return TYPE; }
+"{"                               { return BROPEN; }
+"}"                               { return BRCLOSE; }
+\;                                { return SEMI; }
+(" ")                             { return SPACE; }
+(\[\])?(\[[0-9]*\])*              { return ARR; }    // Array pattern
+\n                           { return NL; }
 [ \t]                           { /* Ignore whitespace */ }
-.                               { printf("Invalid string\n"); return 0; }  // Handle unknown characters without abrupt exit
+.                               { printf("Invalid string\n"); return 0; }  // Handle unknown characters
 %%
 int yywrap() { return 1; }

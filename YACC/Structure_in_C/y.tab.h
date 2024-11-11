@@ -55,13 +55,14 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     STRUCT = 258,                  /* STRUCT  */
-    ID = 259,                      /* ID  */
-    BROPEN = 260,                  /* BROPEN  */
-    BRCLOSE = 261,                 /* BRCLOSE  */
-    TYPE = 262,                    /* TYPE  */
-    SEMI = 263,                    /* SEMI  */
-    ARR = 264,                     /* ARR  */
-    NL = 265                       /* NL  */
+    SPACE = 259,                   /* SPACE  */
+    ID = 260,                      /* ID  */
+    BROPEN = 261,                  /* BROPEN  */
+    BRCLOSE = 262,                 /* BRCLOSE  */
+    TYPE = 263,                    /* TYPE  */
+    SEMI = 264,                    /* SEMI  */
+    ARR = 265,                     /* ARR  */
+    NL = 266                       /* NL  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -71,13 +72,14 @@ extern int yydebug;
 #define YYerror 256
 #define YYUNDEF 257
 #define STRUCT 258
-#define ID 259
-#define BROPEN 260
-#define BRCLOSE 261
-#define TYPE 262
-#define SEMI 263
-#define ARR 264
-#define NL 265
+#define SPACE 259
+#define ID 260
+#define BROPEN 261
+#define BRCLOSE 262
+#define TYPE 263
+#define SEMI 264
+#define ARR 265
+#define NL 266
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
