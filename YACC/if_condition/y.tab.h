@@ -61,7 +61,10 @@ extern int yydebug;
     CLOPEN = 262,                  /* CLOPEN  */
     ID = 263,                      /* ID  */
     RELOP = 264,                   /* RELOP  */
-    NL = 265                       /* NL  */
+    NL = 265,                      /* NL  */
+    STR = 266,                     /* STR  */
+    PRINTF = 267,                  /* PRINTF  */
+    SEMI = 268                     /* SEMI  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -78,6 +81,9 @@ extern int yydebug;
 #define ID 263
 #define RELOP 264
 #define NL 265
+#define STR 266
+#define PRINTF 267
+#define SEMI 268
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

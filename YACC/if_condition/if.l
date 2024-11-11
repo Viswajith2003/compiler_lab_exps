@@ -4,6 +4,7 @@
 #include<stdlib.h>
 %}
 %%
+printf                       { return PRINTF; }
 if                           { return IF; }
 "("                          { return BROPEN; }
 ")"                          { return BRCLOSE; }
@@ -11,6 +12,9 @@ if                           { return IF; }
 "}"                          { return CLCLOSE; }
 ([A-Za-z]([A-Za-z]|[0-9])*)  { return ID; }
 "<"|">"|"<="|">="            { return RELOP; }
-\n                           { return NL; }   
+\"                           { return STR; }
+";"                          { return SEMI; }
+\n                           { return NL; }  
+(" ")                        { }
 %%
 int yywrap(){return 1;}
