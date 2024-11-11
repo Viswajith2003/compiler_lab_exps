@@ -3,15 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 int yyerror(char *s);
-int yylex(void);
 %}
 
-%token FOP BRCLOSE BROPEN COMMA STR OPER SEMI ID DOT NL
+%token IF BRCLOSE BROPEN CLCLOSE CLOPEN ID RELOP NL
 
 %%
 stmt : S NL {printf("Valid Sting");exit(0);} ;
-S : FOP BROPEN T BRCLOSE SEMI ;
-T : STR ID DOT ID STR COMMA STR OPER STR | ;
+S : IF BROPEN ID RELOP ID BRCLOSE CLOPEN CLCLOSE;
 %%
 int yyerror(char *s)
 {

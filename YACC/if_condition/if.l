@@ -4,15 +4,13 @@
 #include<stdlib.h>
 %}
 %%
-fopen                       { return FOP; }
-"("                         { return BROPEN; }
-")"                         { return BRCLOSE; }
-\"                          { return STR; }
+if                           { return IF; }
+"("                          { return BROPEN; }
+")"                          { return BRCLOSE; }
+"{"                          { return CLOPEN; }
+"}"                          { return CLCLOSE; }
 ([A-Za-z]([A-Za-z]|[0-9])*)  { return ID; }
-.                           { return DOT; }
-", "                           { return COMMA; }
-("r "|"w ")                 { return OPER; }
-"; "                          { return SEMI; }
-\n                          { return NL; }   
+"<"|">"|"<="|">="            { return RELOP; }
+\n                           { return NL; }   
 %%
 int yywrap(){return 1;}
