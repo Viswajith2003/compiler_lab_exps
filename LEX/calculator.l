@@ -1,36 +1,40 @@
 %{
-#include<stdio.h>
-#include<string.h>
-int values[2],i=0;
+int i=0,val[2];
 char op;
 %}
-digit    [0-9]
-operator ["+"|"-"|"*"|"/"]
+digit[0-9]
+operator "+"|"-"|"*"|"/"
 %%
-{digit}+   {values[i++]=atoi(yytext);}
+{digit}+   {val[i++]=atoi(yytext);}
 {operator} {op=yytext[0];}
 %%
-int yywrap(void){}
-void main()
+#include<stdio.h>
+#include<string.h>
+
+int yywrap(void){ }
+int main()
 {
-    printf("Enter the Operation:");
+    printf("Enter the expression:");
     yylex();
-    int result;
+
+    double result;
     switch(op)
     {
         case '+':
-            result=values[0]+values[1];
+            result =val[0] + val[1];
             break;
-        case '-': 
-            result=values[0]-values[1];
+        case '-':
+            result =val[0] - val[1];
             break;
         case '*':
-            result=values[0]*values[1];
+            result =val[0] * val[1];
             break;
-        case '/':  
-            result=values[0]/values[1]; 
+        case '/':
+            result =(double)val[0] / val[1];
             break;
-        return 0;
+        default:
+            printf("Invalid operator");
     }
-    printf("Result: %d\n",result);
+    printf("The result is: %.2f",result);
+    return 0;
 }

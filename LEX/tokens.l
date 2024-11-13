@@ -1,59 +1,49 @@
+keywords "int"|"float"|"char"|"double"|"long"|"if"|"switch"|"else"|"elseif"|"break"|"continue"|"for"|"while"|"do"|"void"|"struct"|"default"|"case"|"switch"|"return" 
+letter [A-Za-z]
+digit [0-9]
+aop "+"|"-"|"/"|"%"|"*"
+lop "&&"|"||"|"!"
+relop "<"|">"|"<="|">="|"=="|"!="
+sp "#"|"@"|"$"|"("|")"|"{"|"}"|";"|"."
+
 %{
-#include <stdio.h>
-#include <string.h>
-
-char keywords[100][100], identifiers[100][100], operators[100][100], special[100][100];
-int i = 0, j = 0, k = 0, s = 0;
+char keyword[100][100],identifier[100][100],special[100][100],operator[100][100];
+int i=0,j=0,k=0,s=0;
 %}
-
 %%
-
-/* Define patterns */
-keywords      int|float|char|long|double|if|else|void|for|while|do|break|continue|return|case|switch|default|struct
-letter        [A-Za-z]
-digit         [0-9]
-aop           (\+|-|\*|\/|%)
-relop         (<=|>=|==|!=|<|>)
-lop           (&&|\|\||!)
-sp            [@#${}()\[\]]
-
+{keywords}  {strcpy(keyword[i++],yytext);}
+({aop}|{relop}|{lop})   {strcpy(operator[j++],yytext);}
+({letter}|_?({letter}|{digit})*)   {strcpy(identifier[k++],yytext);}
+{sp}             {strcpy(special[s++],yytext);}
 %%
-{keywords}                { strcpy(keywords[i++], yytext); }
-({aop}|{relop}|{lop})     { strcpy(operators[j++], yytext); }
-{sp}                      { strcpy(special[s++], yytext); }
-({letter}|_)+({letter}|{digit}|_)*  { strcpy(identifiers[k++], yytext); }
-.                         {}
-%%
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
-int main() {
-    yyin = fopen("textFiles/tokens.c", "r");
-    if (!yyin) {
-        printf("Error: Cannot open file tokens.c\n");
-        return 1;
-    }
+int yywrap(void){}
+void main()
+{
+    yyin=fopen("./textFiles/tokens.c","r");
     yylex();
-    
-    printf("The tokens are:\n");
-    
-    printf("Keywords:\n");
-    for (int m = 0; m < i; m++) {
-        printf("%s\n", keywords[m]);
+
+    printf("Keyword are:\n");
+    for(int m=0;m<i;m++)
+    {
+        printf("%s \n",keyword[m]);
     }
-    
-    printf("Operators:\n");
-    for (int m = 0; m < j; m++) {
-        printf("%s\n", operators[m]);
+    printf("identifiers are:\n");
+    for(int m=0;m<i;m++)
+    {
+        printf("%s \n",identifier[m]);
     }
-    
-    printf("Identifiers:\n");
-    for (int m = 0; m < k; m++) {
-        printf("%s\n", identifiers[m]);
+    printf("Operators are:\n");
+    for(int m=0;m<i;m++)
+    {
+        printf("%s \n",operator[m]);
     }
-    
-    printf("Special Characters:\n");
-    for (int m = 0; m < s; m++) {
-        printf("%s\n", special[m]);
+    printf("Special chars are:\n");
+    for(int m=0;m<i;m++)
+    {
+        printf("%s \n",special[m]);
     }
-    
-    return 0;
 }

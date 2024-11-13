@@ -370,9 +370,9 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    2,    1,    1,    1,    1,    1,    1,
-        1,    2,    2,    1,    1,    1,    2,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    2,    3,    1,    4,    1,    5,    6,    6,    6,
+        6,    6,    6,    6,    6,    6,    6,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -380,7 +380,7 @@ static const YY_CHAR yy_ec[256] =
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    2,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -397,14 +397,14 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[4] =
+static const YY_CHAR yy_meta[7] =
     {   0,
-        1,    1,    2
+        1,    1,    1,    1,    1,    2
     } ;
 
 static const flex_int16_t yy_base[10] =
     {   0,
-        0,    0,    5,    6,    6,    0,    0,    6,    2
+        0,    0,    8,    9,    9,    0,    0,    9,    5
     } ;
 
 static const flex_int16_t yy_def[10] =
@@ -412,14 +412,16 @@ static const flex_int16_t yy_def[10] =
         8,    1,    8,    8,    8,    9,    9,    0,    8
     } ;
 
-static const flex_int16_t yy_nxt[10] =
+static const flex_int16_t yy_nxt[16] =
     {   0,
-        4,    5,    6,    7,    8,    3,    8,    8,    8
+        4,    5,    5,    5,    5,    6,    7,    8,    3,    8,
+        8,    8,    8,    8,    8
     } ;
 
-static const flex_int16_t yy_chk[10] =
+static const flex_int16_t yy_chk[16] =
     {   0,
-        1,    1,    1,    9,    3,    8,    8,    8,    8
+        1,    1,    1,    1,    1,    1,    9,    3,    8,    8,
+        8,    8,    8,    8,    8
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -438,9 +440,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "calculator.l"
 #line 2 "calculator.l"
-#include<stdio.h>
-#include<string.h>
-int values[2],i=0;
+int i=0,val[2];
 char op;
 #line 446 "lex.yy.c"
 #line 447 "lex.yy.c"
@@ -660,7 +660,7 @@ YY_DECL
 		}
 
 	{
-#line 9 "calculator.l"
+#line 7 "calculator.l"
 
 #line 666 "lex.yy.c"
 
@@ -695,7 +695,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 6 );
+		while ( yy_base[yy_current_state] != 9 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -721,17 +721,17 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "calculator.l"
-{values[i++]=atoi(yytext);}
+#line 8 "calculator.l"
+{val[i++]=atoi(yytext);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "calculator.l"
+#line 9 "calculator.l"
 {op=yytext[0];}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 12 "calculator.l"
+#line 10 "calculator.l"
 ECHO;
 	YY_BREAK
 #line 738 "lex.yy.c"
@@ -1739,29 +1739,35 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 12 "calculator.l"
+#line 10 "calculator.l"
 
-int yywrap(void){}
-void main()
+#include<stdio.h>
+#include<string.h>
+
+int yywrap(void){ }
+int main()
 {
-    printf("Enter the Operation:");
+    printf("Enter the expression:");
     yylex();
-    int result;
+
+    double result;
     switch(op)
     {
         case '+':
-            result=values[0]+values[1];
+            result =val[0] + val[1];
             break;
-        case '-': 
-            result=values[0]-values[1];
+        case '-':
+            result =val[0] - val[1];
             break;
         case '*':
-            result=values[0]*values[1];
+            result =val[0] * val[1];
             break;
-        case '/':  
-            result=values[0]/values[1]; 
+        case '/':
+            result =(double)val[0] / val[1];
             break;
-        return 0;
+        default:
+            printf("Invalid operator");
     }
-    printf("Result: %d\n",result);
+    printf("The result is: %.2f",result);
+    return 0;
 }
