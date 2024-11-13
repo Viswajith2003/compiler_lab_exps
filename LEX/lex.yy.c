@@ -438,12 +438,34 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "calculator.l"
-#line 2 "calculator.l"
-int i=0,val[2];
+#line 1 "postfixEva.l"
+#line 2 "postfixEva.l"
+int stack[100],top=-1;
 char op;
-#line 446 "lex.yy.c"
-#line 447 "lex.yy.c"
+void push(int i){ stack[++top]=i;}
+int pop(){ return stack[top--];}
+int calculate(int a,int b,char op)
+{
+    switch(op)
+    {
+        case '+':
+            return a + b;
+            break;
+        case '-':
+            return a - b;
+            break;
+        case '/':
+            return a / b;
+            break;
+        case '*':
+            return a * b;
+            break;
+        default:
+            return 0;
+    }
+}
+#line 468 "lex.yy.c"
+#line 469 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -660,9 +682,9 @@ YY_DECL
 		}
 
 	{
-#line 7 "calculator.l"
+#line 29 "postfixEva.l"
 
-#line 666 "lex.yy.c"
+#line 688 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -721,20 +743,20 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "calculator.l"
-{val[i++]=atoi(yytext);}
+#line 30 "postfixEva.l"
+{push(atoi(yytext));}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "calculator.l"
-{op=yytext[0];}
+#line 31 "postfixEva.l"
+{push(calculate(pop(),pop(),yytext[0]));}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "calculator.l"
+#line 32 "postfixEva.l"
 ECHO;
 	YY_BREAK
-#line 738 "lex.yy.c"
+#line 760 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1739,35 +1761,14 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 10 "calculator.l"
+#line 32 "postfixEva.l"
 
 #include<stdio.h>
 #include<string.h>
-
-int yywrap(void){ }
-int main()
+int yywrap(void){};
+void main()
 {
     printf("Enter the expression:");
     yylex();
-
-    double result;
-    switch(op)
-    {
-        case '+':
-            result =val[0] + val[1];
-            break;
-        case '-':
-            result =val[0] - val[1];
-            break;
-        case '*':
-            result =val[0] * val[1];
-            break;
-        case '/':
-            result =(double)val[0] / val[1];
-            break;
-        default:
-            printf("Invalid operator");
-    }
-    printf("The result is: %.2f",result);
-    return 0;
+    printf("The result is:%d\n",pop());
 }
